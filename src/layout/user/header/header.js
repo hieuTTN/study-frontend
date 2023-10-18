@@ -1,18 +1,24 @@
 import styles from './header.scss';
-import logo from '../../assest/images/logo.png';
+import logo from '../../../assest/images/logo.png';
+
+function logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.replace('/login')
+}
 
 function header (){
     var token = localStorage.getItem('token');
-    var authen = <li className="nav-item"><a className="nav-link" href="#">Đăng nhập</a></li>
-    if(token == null){
-        authen = <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+    var authen = <li className="nav-item"><a className="nav-link" href="/login">Đăng nhập</a></li>
+    if(token != null){
+        authen = <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Tài khoản
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="account.html">Tài khoản</a></li>
-                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a className="dropdown-item" href="account.html">Tài khoản</a></li>
+                    <li><a className="dropdown-item logoutitem" onClick={logout}>Đăng xuất</a></li>
                     </ul>
                 </li>
     }

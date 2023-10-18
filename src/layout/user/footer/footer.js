@@ -2,7 +2,7 @@ import StyleFooter from './footer.scss'
 
 function footer(){
     return(
-        <footer class="footer" id="footer">
+        <footer className="footer" id="footer">
 <div className="footer-main py-5">
     <div className="container">
       <div className="row gy-5 g-md-4 align-items-start lh-lg mb-5">

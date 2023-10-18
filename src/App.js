@@ -1,31 +1,37 @@
 import { useState } from 'react';
-import {Routes, Route} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import { HelmetProvider } from 'react-helmet-async';
+import {Routes, Route,BrowserRouter as Router} from 'react-router-dom'
 import styleApp from './styles/App.scss'
-import Header from './component/header/header'
-import Footer from './component/footer/footer'
-import Home from './pages/home/home'
-import Introduct from './pages/introduction/introduction'
+import Home from './pages/public/home/home'
+import Header from './layout/user/header/header';
+import { publicRoutes, privateRoutes, adminRoutes } from './router/index';
+import AdminLayout from './layout/admin/Layout'
 
 function App() {
-  const [counter, setCount] = useState(1);
-
-  function oke(){
-      setCount(counter => counter + 1)
-      setCount(counter => counter + 1)
-  }
-
+  // let checkAdmin = window.location.pathname.startsWith("/admin")
+  // let checkEmployee = window.location.pathname.startsWith("/employee")
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/intro' element={<Introduct/>} />
-      </Routes>
-      <Footer />
-    </div>
-    
-  );
-  
+    <Router>
+      <div className="App">
+          <Routes>
+            <Route path='/' element={<Home/>} />
+
+
+            {adminRoutes.map((route, index) => {
+              const Layout = route.layout || AdminLayout
+              const Page = route.component
+              return <Route key={index} path={route.path} element={
+                <Layout>
+                  <Page/>
+                </Layout>
+              }/>
+            })}
+          </Routes>
+      </div>
+    </Router>
+);
+
 }
 
 export default App;
