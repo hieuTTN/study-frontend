@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
-import {loadAllUser,lockOrUnlock} from '../../../services/admin/user'
+import {loadAllUser,lockOrUnlock,loadAuthority,changeRole} from '../../../services/admin/user'
 import ReactPaginate from 'react-paginate';
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 var size = 10
-function AdminUser(){
+const AdminUser = ()=>{
+    console.log(2222);
     const [items, setItems] = useState([]);
+    const [itemsAutho, setItemsAutho] = useState([]);
     const [pageCount, setpageCount] = useState(0);
 
     useEffect(()=>{
@@ -12,12 +16,19 @@ function AdminUser(){
             const response = await loadAllUser(page, size,role);
             var result = await response.json();
             var totalPage = result.totalPages;
-            var totalElements = result.totalElements;
             setItems(result.content)
             setpageCount(totalPage);
         };
         getUser(0, "");
+
+        const getAuthority = async() =>{
+            const response = await loadAuthority();
+            var result = await response.json();
+            setItemsAutho(result)
+        };
+        getAuthority();
     }, []);
+
 
     const fetchUsers = async (page, role) => {
         const res = await loadAllUser(page, size,role);
@@ -48,15 +59,30 @@ function AdminUser(){
         setItems(listUser);
     }
 
+    async function changeRoleUser(){
+        var id = document.getElementById("iduser").value
+        var rolename = document.getElementById("rolelist").value
+        var res = await changeRole(rolename, id);
+        if(res.status < 300){
+            toast.success("thay đổi quyền thành công")
+            document.getElementById("btnclosemodal").click()
+            loadByRole();
+        }
+        else{
+            toast.error("thay đổi quyền thất bại")
+        }
+    }
 
+
+    function setRole(rolename, id){
+        document.getElementById("rolelist").value = rolename
+        document.getElementById("iduser").value = id
+    }
+    
     return (
         <div>
             <div class="col-sm-12 header-sp">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-6">
-                            <label className='lbblock lb-form'>&Thinspace</label><br/>
-                            <a data-bs-toggle="modal" data-bs-target="#addtk" class="btn btn-success"><i class="fa fa-plus"></i> Thêm admin</a>
-                        </div>
                         <div class="col-md-3 col-sm-6 col-6">
                             <label class="lb-form">Chọn quyền</label>
                             <select onChange={loadByRole} id="role" class="form-control">
@@ -90,7 +116,7 @@ function AdminUser(){
                                     <td>{item.email}</td>
                                     <td>{item.createdDate}</td>
                                     <td>{item.authorities.name}
-                                    <i className='fa fa-edit faicon'></i></td>
+                                    <i onClick={()=>setRole(item.authorities.name,item.id)} data-bs-toggle="modal" data-bs-target="#addtk" className='fa fa-edit faicon'></i></td>
                                     <td class="sticky-col">
                                     {item.actived == true?
                                     <button onClick={()=>lockOrUnlock(item.id, 1) } className='btn btn-primary'>Khóa</button>:
@@ -105,7 +131,7 @@ function AdminUser(){
                     marginPagesDisplayed={2} 
                     pageCount={pageCount} 
                     onPageChange={handlePageClick}
-                    containerClassName={'pagination justify-content-center'} 
+                    containerClassName={'pagination'} 
                     pageClassName={'page-item'} 
                     pageLinkClassName={'page-link'}
                     previousClassName='page-item'
@@ -116,6 +142,25 @@ function AdminUser(){
                     breakLinkClassName='page-link'  
                     activeClassName='active'/>
                 </div>
+
+
+            <div class="modal fade" id="addtk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thay đổi quyền</h5> <button id='btnclosemodal' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div class="modal-body row">
+                            <input id='iduser' type='hidden'/>
+                            <select className='form-control' id='rolelist'>
+                            {itemsAutho.map((item=>{
+                                return <option value={item.name}>{item.name}</option>
+                            }))}
+                            </select>
+                            <button onClick={()=>changeRoleUser()} className='btn btn-primary btnsubmit'>Thay đổi quyền</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

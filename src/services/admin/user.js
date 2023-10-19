@@ -15,6 +15,16 @@ async function loadAllUser(page, size, role){
     return response;
 }
 
+async function loadAuthority(){
+    var url = 'http://localhost:8080/api/admin/authority';
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + token
+        })
+    });
+    return response;
+}
 
 async function lockOrUnlock(id, typeLock) {
     var con = window.confirm("Xác nhận hành động?")
@@ -43,4 +53,15 @@ async function lockOrUnlock(id, typeLock) {
     }
 }
 
-export {loadAllUser,lockOrUnlock}
+async function changeRole(rolename, iduser){
+    var url = 'http://localhost:8080/api/admin/update-role?id='+iduser+'&role='+rolename;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + token
+        })
+    });
+    return response;
+}
+
+export {loadAllUser,lockOrUnlock,loadAuthority,changeRole}
