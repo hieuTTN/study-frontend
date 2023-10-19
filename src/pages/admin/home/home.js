@@ -1,4 +1,3 @@
-import LayoutAdmin from '../../../layout/admin/Layout'
 
 function homeAdmin(){
     return(

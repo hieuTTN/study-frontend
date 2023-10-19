@@ -1,8 +1,7 @@
-import styles from './layout.scss';
-import stylecus from './stylecus.scss';
+import styles from '../admin/layout.scss';
 
 function header({ children }){
-    checkAdmin();
+    checkEmployee();
     return(
         <div class="sb-nav-fixed">
             <nav id="top" class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -23,12 +22,20 @@ function header({ children }){
                                     Tổng quan
                                 </a>
                                 <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-users iconmenu"></i></div>
-                                    Nhân viên
+                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                    Sinh viên
                                 </a>
-                                <a class="nav-link" href="user">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-user iconmenu"></i></div>
-                                    Tài khoản
+                                <a class="nav-link" href="index.html">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                    Môn học
+                                </a>
+                                <a class="nav-link" href="index.html">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                    Lớp học
+                                </a>
+                                <a class="nav-link" href="index.html">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                    Khoa
                                 </a>
                                 <a onClick={logout} class="nav-link" href="#">
                                     <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt iconmenu"></i></div>
@@ -48,9 +55,9 @@ function header({ children }){
     );
 }
 
-async function checkAdmin(){
+async function checkEmployee(){
     var token = localStorage.getItem("token");
-    var url = 'http://localhost:8080/api/admin/checkAdmin';
+    var url = 'http://localhost:8080/api/emp/checkEmployee';
     const response = await fetch(url, {
         headers: new Headers({
             'Authorization': 'Bearer ' + token
@@ -60,7 +67,6 @@ async function checkAdmin(){
         window.location.replace('../login')
     }
 }
-
 
 function logout(){
     localStorage.removeItem("token");

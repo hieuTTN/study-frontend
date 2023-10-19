@@ -3,12 +3,8 @@ import Footer from '../../../layout/user/footer/footer'
 
 function Home({child}){
     return(
-        <div>
-            <Header/>
-            <div className='contents'>
-                ${child}
-            </div>
-            <Footer/>
+        <div className='contents'>
+            <h1>Hi banj</h1>
         </div>
     );
 }
