@@ -22,7 +22,7 @@ function header({ children }){
                                     <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
                                     Tổng quan
                                 </a>
-                                <a class="nav-link" href="index.html">
+                                <a class="nav-link" href="employee">
                                     <div class="sb-nav-link-icon"><i class="fa fa-users iconmenu"></i></div>
                                     Nhân viên
                                 </a>
