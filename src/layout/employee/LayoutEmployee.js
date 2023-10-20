@@ -1,4 +1,5 @@
 import styles from '../admin/layout.scss';
+import {handleChangePass} from '../../services/auth'
 
 function header({ children }){
     checkEmployee();
@@ -21,21 +22,25 @@ function header({ children }){
                                     <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
                                     Tổng quan
                                 </a>
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                <a class="nav-link" href="student">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-users iconmenu"></i></div>
                                     Sinh viên
                                 </a>
                                 <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                    <div class="sb-nav-link-icon"><i class="fa fa-book iconmenu"></i></div>
                                     Môn học
                                 </a>
                                 <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                    <div class="sb-nav-link-icon"><i class="fa fa-door-open iconmenu"></i></div>
                                     Lớp học
                                 </a>
                                 <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
+                                    <div class="sb-nav-link-icon"><i class="fa fa-list iconmenu"></i></div>
                                     Khoa
+                                </a>
+                                <a data-bs-toggle="modal" data-bs-target="#changepassword" class="nav-link" href="#">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-key iconmenu"></i></div>
+                                    Mật khẩu
                                 </a>
                                 <a onClick={logout} class="nav-link" href="#">
                                     <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt iconmenu"></i></div>
@@ -49,6 +54,26 @@ function header({ children }){
                     <main class="main">
                         {children}
                     </main>
+                </div>
+            </div>
+
+            <div class="modal fade" id="changepassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đổi mật khẩu</h5> <button id='btnclosemodal' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div class="modal-body row">
+                            <form method='post' onSubmit={handleChangePass}>
+                                <label class="lbacc">Mật khẩu hiện tại *</label>
+                                <input required name='currentpass' type="password" class="form-control" />
+                                <label class="lbacc">Mật khẩu mới *</label>
+                                <input required name='newpass' type="password" class="form-control"/>
+                                <label class="lbacc">Xác nhận mật khẩu mới *</label>
+                                <input required name='renewpass' type="password" class="form-control"/>
+                                <button type="submit" class="btntt">LƯU</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

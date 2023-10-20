@@ -1,5 +1,6 @@
 import styles from './layout.scss';
 import stylecus from './stylecus.scss';
+import {handleChangePass} from '../../services/auth'
 
 function header({ children }){
     checkAdmin();
@@ -30,6 +31,10 @@ function header({ children }){
                                     <div class="sb-nav-link-icon"><i class="fa fa-user iconmenu"></i></div>
                                     Tài khoản
                                 </a>
+                                <a data-bs-toggle="modal" data-bs-target="#changepassword" class="nav-link" href="#">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-key iconmenu"></i></div>
+                                    Mật khẩu
+                                </a>
                                 <a onClick={logout} class="nav-link" href="#">
                                     <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt iconmenu"></i></div>
                                     Đăng xuất
@@ -42,6 +47,26 @@ function header({ children }){
                     <main class="main">
                         {children}
                     </main>
+                </div>
+            </div>
+
+            <div class="modal fade" id="changepassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đổi mật khẩu</h5> <button id='btnclosemodal' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div class="modal-body row">
+                            <form method='post' onSubmit={handleChangePass}>
+                                <label class="lbacc">Mật khẩu hiện tại *</label>
+                                <input required name='currentpass' type="password" class="form-control" />
+                                <label class="lbacc">Mật khẩu mới *</label>
+                                <input required name='newpass' type="password" class="form-control"/>
+                                <label class="lbacc">Xác nhận mật khẩu mới *</label>
+                                <input required name='renewpass' type="password" class="form-control"/>
+                                <button type="submit" class="btntt">LƯU</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

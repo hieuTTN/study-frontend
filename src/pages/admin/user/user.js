@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 var size = 10
 const AdminUser = ()=>{
-    console.log(2222);
     const [items, setItems] = useState([]);
     const [itemsAutho, setItemsAutho] = useState([]);
     const [pageCount, setpageCount] = useState(0);

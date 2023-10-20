@@ -10,6 +10,7 @@ import addEmployeeAdmin from '../pages/admin/employee/addemployee'
 
 //employee
 import homeEmployee from '../pages/employee/home/home'
+import studentEmployee from '../pages/employee/student/student'
 
 //public
 import login from '../pages/public/login/login'
@@ -32,7 +33,8 @@ const adminRoutes = [
 ];
 
 const employeeRoutes = [
-    { path: "/employee/home", component: homeEmployee, layout: layoutEmployee }
+    { path: "/employee/home", component: homeEmployee, layout: layoutEmployee },
+    { path: "/employee/student", component: studentEmployee, layout: layoutEmployee },
 ];
 
 export { publicRoutes, privateRoutes, adminRoutes, employeeRoutes};
