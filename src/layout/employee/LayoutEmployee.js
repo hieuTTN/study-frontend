@@ -26,7 +26,7 @@ function header({ children }){
                                     <div class="sb-nav-link-icon"><i class="fa fa-users iconmenu"></i></div>
                                     Sinh viên
                                 </a>
-                                <a class="nav-link" href="index.html">
+                                <a class="nav-link" href="subject">
                                     <div class="sb-nav-link-icon"><i class="fa fa-book iconmenu"></i></div>
                                     Môn học
                                 </a>

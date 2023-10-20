@@ -7315,7 +7315,7 @@ fieldset:disabled .btn {
     margin-top: 20px;
     height: 4px;
     width: 100%;
-    display: none;
+    // display: none;
 }
 
 .bar {
@@ -12012,7 +12012,11 @@ body {
     margin-top: 20px;
     height: 4px;
     width: 100%;
+    margin-bottom: 15px;
     display: none;
+}
+.unvisible{
+    visibility: hidden;
 }
 
 .bar {

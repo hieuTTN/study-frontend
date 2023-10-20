@@ -19,6 +19,34 @@ async function loadAllEmployee(page, param){
     return response;
 }
 
+async function deleteEmployee(id){
+    var con = window.confirm("Xác nhận xóa nhân viên?")
+    if (con == false) {
+        return;
+    }
+    var url = 'http://localhost:8080/api/employee/admin/delete?id=' + id;
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + token,
+        })
+    });
+    if(response.status < 300){
+        toast.success("Xóa nhân viên thành công")
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        window.location.reload();
+    }
+    else{
+        if(response.status == 417){
+            var result  = await response.json();
+            toast.error(result.errorMessage)
+        } 
+        else{
+            toast.error("Xóa thất bại")
+        }
+    }
+}
+
 const AdminEmployee = ()=>{
     const [items, setItems] = useState([]);
     const [pageCount, setpageCount] = useState(0);
@@ -108,7 +136,7 @@ const AdminEmployee = ()=>{
                                         <td>{item.profile.citizenIdentity}</td>
                                         <td class="sticky-col">
                                             <a href={"add-employee?id="+item.employeeId}><i className='fa fa-edit iconaction'></i></a>
-                                            <i className='fa fa-trash iconaction'></i>
+                                            <i onClick={()=>deleteEmployee(item.employeeId)} className='fa fa-trash iconaction'></i>
                                         </td>
                                     </tr>
                             })}

@@ -11,6 +11,8 @@ import addEmployeeAdmin from '../pages/admin/employee/addemployee'
 //employee
 import homeEmployee from '../pages/employee/home/home'
 import studentEmployee from '../pages/employee/student/student'
+import subjectEmployee from '../pages/employee/subject/subject'
+import addSubjectEmployee from '../pages/employee/subject/addSubject'
 
 //public
 import login from '../pages/public/login/login'
@@ -35,6 +37,8 @@ const adminRoutes = [
 const employeeRoutes = [
     { path: "/employee/home", component: homeEmployee, layout: layoutEmployee },
     { path: "/employee/student", component: studentEmployee, layout: layoutEmployee },
+    { path: "/employee/subject", component: subjectEmployee, layout: layoutEmployee },
+    { path: "/employee/add-subject", component: addSubjectEmployee, layout: layoutEmployee },
 ];
 
 export { publicRoutes, privateRoutes, adminRoutes, employeeRoutes};
