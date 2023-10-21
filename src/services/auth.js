@@ -26,10 +26,10 @@ async function handleLogin(event) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
         if (result.user.authorities.name === "ROLE_ADMIN") {
-            window.location.href = 'admin/home';
+            window.location.href = 'admin/user';
         }
         if (result.user.authorities.name === "ROLE_EMPLOYEE") {
-            window.location.href = 'employee/home';
+            window.location.href = 'employee/student';
         }
         if (result.user.authorities.name === "ROLE_STUDENT") {
             window.location.href = '/';

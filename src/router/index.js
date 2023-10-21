@@ -14,6 +14,9 @@ import studentEmployee from '../pages/employee/student/student'
 import subjectEmployee from '../pages/employee/subject/subject'
 import addSubjectEmployee from '../pages/employee/subject/addSubject'
 import addStudentEmployee from '../pages/employee/student/addStudent'
+import classEmployee from '../pages/employee/classes/classes'
+import addClassEmployee from '../pages/employee/classes/addClass'
+import facultyEmployee from '../pages/employee/faculty/faculty'
 
 //public
 import login from '../pages/public/login/login'
@@ -41,6 +44,9 @@ const employeeRoutes = [
     { path: "/employee/subject", component: subjectEmployee, layout: layoutEmployee },
     { path: "/employee/add-subject", component: addSubjectEmployee, layout: layoutEmployee },
     { path: "/employee/add-student", component: addStudentEmployee, layout: layoutEmployee },
+    { path: "/employee/class", component: classEmployee, layout: layoutEmployee },
+    { path: "/employee/add-class", component: addClassEmployee, layout: layoutEmployee },
+    { path: "/employee/faculty", component: facultyEmployee, layout: layoutEmployee },
 ];
 
 export { publicRoutes, privateRoutes, adminRoutes, employeeRoutes};

@@ -19,8 +19,8 @@ function header({ children }){
                         <div class="sb-sidenav-menu">
                             <div class="nav">
                                 <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-database iconmenu"></i></div>
-                                    Tổng quan
+                                    <div class="sb-nav-link-icon"><i class="fa fa-users iconmenu"></i></div>
+                                    Giảng viên
                                 </a>
                                 <a class="nav-link" href="student">
                                     <div class="sb-nav-link-icon"><i class="fa fa-users iconmenu"></i></div>
@@ -30,13 +30,13 @@ function header({ children }){
                                     <div class="sb-nav-link-icon"><i class="fa fa-book iconmenu"></i></div>
                                     Môn học
                                 </a>
-                                <a class="nav-link" href="index.html">
+                                <a class="nav-link" href="faculty">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-book iconmenu"></i></div>
+                                    Đào tạo
+                                </a>
+                                <a class="nav-link" href="class">
                                     <div class="sb-nav-link-icon"><i class="fa fa-door-open iconmenu"></i></div>
                                     Lớp học
-                                </a>
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-list iconmenu"></i></div>
-                                    Khoa
                                 </a>
                                 <a data-bs-toggle="modal" data-bs-target="#changepassword" class="nav-link" href="#">
                                     <div class="sb-nav-link-icon"><i class="fa fa-key iconmenu"></i></div>

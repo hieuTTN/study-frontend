@@ -34,6 +34,35 @@ async function loadAllStudentByUrl(page){
     return response;
 }
 
+async function deleteStudent(id){
+    var con = window.confirm("Xác nhận xóa sinh viên?")
+    if (con == false) {
+        return;
+    }
+    var url = 'http://localhost:8080/api/student/employee/delete?id=' + id;
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + token,
+        })
+    });
+    if(response.status < 300){
+        toast.success("Xóa sinh viên thành công")
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        window.location.reload();
+    }
+    else{
+        if(response.status == 417){
+            var result  = await response.json();
+            toast.error(result.errorMessage)
+        } 
+        else{
+            toast.error("Xóa thất bại")
+        }
+    }
+}
+
+
 async function loadAllFaculty(){
     const response = await fetch('http://localhost:8080/api/faculty/all/find-all', {
         headers: new Headers({ 'Authorization': 'Bearer ' + token })
@@ -249,7 +278,7 @@ function EmployeeStudent(){
                                     <td>{item.facultyName}</td>
                                     <td class="sticky-col">
                                         <a href={"add-student?id="+item.studentId}><i className='fa fa-edit iconaction'></i></a>
-                                        <i className='fa fa-trash iconaction'></i>
+                                        <i onClick={()=>deleteStudent(item.studentId)} className='fa fa-trash iconaction'></i>
                                         <i onClick={()=>setStdModal(item.studentInfor)} data-bs-toggle="modal" data-bs-target="#studentinfor" className='fa fa-eye iconaction'></i>
                                     </td>
                                 </tr>
