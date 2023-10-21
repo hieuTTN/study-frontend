@@ -13,6 +13,7 @@ import homeEmployee from '../pages/employee/home/home'
 import studentEmployee from '../pages/employee/student/student'
 import subjectEmployee from '../pages/employee/subject/subject'
 import addSubjectEmployee from '../pages/employee/subject/addSubject'
+import addStudentEmployee from '../pages/employee/student/addStudent'
 
 //public
 import login from '../pages/public/login/login'
@@ -39,6 +40,7 @@ const employeeRoutes = [
     { path: "/employee/student", component: studentEmployee, layout: layoutEmployee },
     { path: "/employee/subject", component: subjectEmployee, layout: layoutEmployee },
     { path: "/employee/add-subject", component: addSubjectEmployee, layout: layoutEmployee },
+    { path: "/employee/add-student", component: addStudentEmployee, layout: layoutEmployee },
 ];
 
 export { publicRoutes, privateRoutes, adminRoutes, employeeRoutes};
