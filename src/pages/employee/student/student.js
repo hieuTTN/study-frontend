@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AsyncSelect from 'react-select/async';
+import logocard from '../../../assest/images/logo.png'
 
 var size = 10;
 var token = localStorage.getItem('token');
@@ -70,6 +71,17 @@ async function loadAllFaculty(){
     return response;
 }
 
+function getNameFaculty(name){
+    var arr = name[0];
+    var i = 0;
+    for(i=0; i< name.length; i++){
+        if(name[i] == ' '){
+            arr += name[i+1];
+        }
+    }
+    return arr
+}
+
 async function loadClassByFaculty(id){
     const response = await fetch('http://localhost:8080/api/class/employee/class-by-faculty?facultyId='+id, {
         headers: new Headers({ 'Authorization': 'Bearer ' + token })
@@ -124,6 +136,7 @@ function EmployeeStudent(){
     const [pageCount, setpageCount] = useState(0);
     const [itemFaculty, setItemFaculty] = useState([]);
     const [itemClass, setItemClass] = useState([]);
+    const [studentCard, setStudentCard] = useState(null);
     useEffect(()=>{
         const getStudent = async(page) =>{
             const response = await loadAllStudent(page,null,null);
@@ -208,15 +221,15 @@ function EmployeeStudent(){
 
     return (
         <div>
-        <div class="col-sm-12 header-sp">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 col-6">
+        <div className="col-sm-12 header-sp">
+                <div className="row">
+                    <div className="col-md-3 col-sm-6 col-6">
                         <a href='add-student' className='btn btn-primary'>Thêm sinh viên</a>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-6">
+                    <div className="col-md-3 col-sm-6 col-6">
                         <button data-bs-toggle="modal" data-bs-target="#chooseFile" className='btn btn-primary'><i className='fa fa-file-excel'></i> Chọn file excel</button>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-6">
+                    <div className="col-md-3 col-sm-6 col-6">
                         <AsyncSelect
                         name='faculty'
                         onChange={hanleOnchangeFaculty}
@@ -225,7 +238,7 @@ function EmployeeStudent(){
                         getOptionValue={(itemFaculty)=>itemFaculty.facultyId} 
                         placeholder='chọn khoa'/>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-6">
+                    <div className="col-md-3 col-sm-6 col-6">
                         <AsyncSelect
                         name='classes'
                         onChange={hanleOnchangeClass}
@@ -236,16 +249,16 @@ function EmployeeStudent(){
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="wrapper">
-                    <div class="headertable">
-                        <div class="divsearchtb">
+            <div className="col-sm-12">
+                <div className="wrapper">
+                    <div className="headertable">
+                        <div className="divsearchtb">
                             <label className='lbsearch'>search:</label>
-                            <input onChange={searchByParam} id="searchtable" placeholder="tìm kiếm" class="inputsearchtable" />
+                            <input onChange={searchByParam} id="searchtable" placeholder="tìm kiếm" className="inputsearchtable" />
                         </div>
                     </div>
-                    <table class="table table-striped tablefix">
-                        <thead class="thead-tablefix">
+                    <table className="table table-striped tablefix">
+                        <thead className="thead-tablefix">
                             <tr>
                                 <th>id</th>
                                 <th>Mã sinh viên</th>
@@ -257,7 +270,7 @@ function EmployeeStudent(){
                                 <th>Địa chỉ</th>
                                 <th>Lớp</th>
                                 <th>Khoa</th>
-                                <th class="sticky-col">Hành động</th>
+                                <th className="sticky-col">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -276,10 +289,11 @@ function EmployeeStudent(){
                                     <td>{item.profile.address}</td>
                                     <td>{item.classes==null?"":item.classes.name}</td>
                                     <td>{item.facultyName}</td>
-                                    <td class="sticky-col">
+                                    <td className="sticky-col">
                                         <a href={"add-student?id="+item.studentId}><i className='fa fa-edit iconaction'></i></a>
                                         <i onClick={()=>deleteStudent(item.studentId)} className='fa fa-trash iconaction'></i>
                                         <i onClick={()=>setStdModal(item.studentInfor)} data-bs-toggle="modal" data-bs-target="#studentinfor" className='fa fa-eye iconaction'></i>
+                                        <i onClick={()=>setStudentCard(item)} data-bs-toggle="modal" data-bs-target="#studentCard" className='fa fa-print iconaction'></i>
                                     </td>
                                 </tr>
                             })}
@@ -301,14 +315,14 @@ function EmployeeStudent(){
                 breakLinkClassName='page-link'  
                 activeClassName='active'/>
             </div>
-            <div class="modal fade" id="studentinfor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Chi tiết chúng tuyển</h5> <button id='btnclosemodal' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                        <div class="modal-body row">
-                        <table class="table table-striped tablefix">
-                            <thead class="thead-tablefix">
+            <div className="modal fade" id="studentinfor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div className="modal-dialog modal-xl">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Chi tiết chúng tuyển</h5> <button id='btnclosemodal' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div className="modal-body row">
+                        <table className="table table-striped tablefix">
+                            <thead className="thead-tablefix">
                                 <tr>
                                     <th>Tổ hợp chúng tuyển</th>
                                     <th>Thứ tự nguyện vọng</th>
@@ -351,26 +365,188 @@ function EmployeeStudent(){
                 </div>
             </div>
 
-            <div class="modal fade" id="chooseFile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Chọn file để import</h5> <button id='btnclosemodal' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                        <div class="modal-body row">
+            <div className="modal fade" id="chooseFile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div className="modal-dialog modal-md">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Chọn file để import</h5> <button id='btnclosemodal' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div className="modal-body row">
                             <label>Năm học</label>
                             <input id='curyear' type='number' className='form-control'/>
                             <label>Chọn file excel</label>
                             <input id='fileEx' type='file' className='form-control'/>
                             <br/><br/>
                             <div id="loading">
-                                <div class="bar1 bar"></div>
+                                <div className="bar1 bar"></div>
                             </div>
                             <br/><br/><br/><button onClick={readExcel} className='btn btn-primary form-control'>Nhập sinh viên</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div className="modal fade" id="studentCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div className="modal-dialog modal-md">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">In thẻ sinh viên</h5> <button id='btnclosemodal' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div id='bodycard' className="modal-body row">
+                            <div className='row rowcard'>
+                            <div id='cardinfor'>
+                                <div className='cardtop'>
+                                    <div className='cardlogo'>
+                                        <img className='imglogocard' src={logocard}/>
+                                    </div>
+                                    <div className='cardtitle'>
+                                        <h6 className='titlecard'>HỌC VIỆN<br/>CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG</h6>
+                                    </div>
+                                </div>
+                                <div className='main-infor-card'>
+                                    <div className='main-card-left'>
+                                        <img className='imgmaincard'  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdzBNXI0NaKCGpv-i4YmwgpHXne7uaevY4Hw&usqp=CAU'/>
+                                        <div className='stdcodecard'>
+                                            <h6 className='sdtcodesd'>Mã SV</h6>
+                                            <h6 className='sdtcodesd'>B203728</h6>
+                                        </div>
+                                    </div>
+                                    <div className='main-card-right'>
+                                        <p className='maintitle'><span className='tsv'>THẺ SINH VIÊN</span> <span className='tsvtt'>(TẠM THỜI)</span></p>
+                                        <table>
+                                            <tr><td colSpan={2}>
+                                                    <span>Họ tên: <span className='boldtext'>{studentCard==null?"":studentCard.profile.fullname}</span></span>
+                                            </td></tr>
+                                            <tr>
+                                                <td><span>Ngày sinh: <span className='boldtext'>{studentCard==null?"":studentCard.profile.dob?.split("T")[0]}</span></span></td>
+                                                <td><span className='righttext'>Giới tính: <span className='boldtext'>{studentCard==null?"":studentCard.profile.gender==true?"Nam":"Nữ"}</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={2}><span className='blocktext'>HKTT: <span className='boldtext'>{studentCard==null?"":studentCard.profile.address}</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Lớp: <span className='boldtext'>{studentCard==null?"":studentCard.classes==null?"":studentCard.classes.name}</span></span></td>
+                                                <td><span className='righttext'>Hệ: <span className='boldtext'>ĐHCQ</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Ngành: <span className='boldtext upcase'>{studentCard==null?"":getNameFaculty(studentCard.facultyName)}</span></span></td>
+                                                <td><span className='righttext'>Khóa: <span className='boldtext'>{studentCard==null?"":studentCard.academicYear+"-"+Number(Number(studentCard.academicYear) + 4)}</span></span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <button onClick={PrintElem} className='btn btn-primary btnprint'>In thẻ</button>
+                    </div>
+                </div>
+            </div>
     </div>
     );
+}
+
+function PrintElem()
+{
+    var mywindow = window.open('', 'PRINT', 'height=600,width=1000');
+
+    mywindow.document.write(`<html><head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	#cardinfor{
+        border: 2px solid #d1d1d1;
+        padding: 0px;
+        padding-top: 7px;
+        padding-bottom: 20px;
+        width: 450px;
+        margin: auto;
+    }
+    .main-infor-card{
+        min-height:200px;
+    }
+    .cardtop{
+        padding: 0px 10px 0px 10px;
+        border-bottom: 1px solid #d1d1d1;
+    }
+    .titlecard{
+        text-align: center;
+    }
+    .cardlogo{
+        width: 40px;
+        float: left;
+    }
+    .cardtitle{
+        float: none;
+        overflow: hidden;
+    }
+    .imglogocard{
+        width: 40px;
+    }
+    .main-card-left{
+        width: 25%;
+        float: left;
+        padding-top: 10px;
+    }
+    .imgmaincard{
+        margin-left: 10px;
+        width: 90%;
+        object-fit: cover;
+    }
+    .sdtcodesd{
+        display: block;
+        text-align: center;
+        margin-top:-3px;
+    }
+    .stdcodecard{
+        margin-top: 5px;
+        background-color: #fde8dd;
+        padding: 2px 0px 1px 0px;
+    }
+    .maintitle{
+        text-align: center;
+    }
+    .maintitle{
+        font-weight: bold;
+    }
+    .tsv{
+        font-size: 1.3rem;
+        color: #96693d;
+    }
+    .tsvtt{
+        font-size: 0.9rem;
+        color: #c6a3a7;
+    }
+    .main-card-right{
+        width: 65%;
+        float: left;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .boldtext{
+        font-weight: bold;
+    }
+    .blocktext{
+        display: block;
+    }
+    .righttext{
+        margin-left: 10px;
+    }
+    .upcase{
+        text-transform: uppercase;
+    }
+    .btnprint{
+        margin-top: 20px;
+    }
+	</style>
+    </head>`);
+    mywindow.document.write('<body>');
+    mywindow.document.write(document.getElementById("bodycard").innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close();
+    mywindow.focus();
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
 }
 export default EmployeeStudent;

@@ -17,7 +17,7 @@ function header (){
                     Tài khoản
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a className="dropdown-item" href="account.html">Tài khoản</a></li>
+                    <li><a className="dropdown-item" href="account">Tài khoản</a></li>
                     <li><a className="dropdown-item logoutitem" onClick={logout}>Đăng xuất</a></li>
                     </ul>
                 </li>
@@ -61,18 +61,7 @@ function header (){
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav navbar-nav-hover navbar-nav-effect">
                     <li className="nav-item"><a className="nav-link" aria-current="page" href="/">Trang chủ</a></li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Về chúng tôi
-                        </a>
-                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a className="dropdown-item" href="#">Action</a></li>
-                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                        <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li className="nav-item"><a className="nav-link" href="#">Sản phẩm học viên</a></li>
+                    <li className="nav-item"><a className="nav-link" href="#">Xem thời khóa biểu</a></li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -84,9 +73,10 @@ function header (){
                         <li><a className="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                    <li className="nav-item"><a className="nav-link" href="/intro">Lịch khai giảng</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#">Tài liệu</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#">Tin tức</a></li>
+                    <li className="nav-item"><a className="nav-link" href="/intro">Xem lịch thi</a></li>
+                    <li className="nav-item"><a className="nav-link" href="#">Xem học phí</a></li>
+                    <li className="nav-item"><a className="nav-link" href="#">Xem điểm</a></li>
+                    <li className="nav-item"><a className="nav-link" href="#">Xem chương trình đào tạo</a></li>
                     {authen}
                     </ul>
                 </div>
