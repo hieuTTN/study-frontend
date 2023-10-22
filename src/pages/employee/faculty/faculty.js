@@ -151,6 +151,8 @@ function EmployeeFaculty(){
                         <tr>
                             <th>id</th>
                             <th>Tên khoa</th>
+                            <th>Sinh viên đã có lớp</th>
+                            <th>Sinh viên chưa có lớp</th>
                             <th class="sticky-col">Hành động</th>
                         </tr>
                     </thead>
@@ -159,6 +161,8 @@ function EmployeeFaculty(){
                             return <tr>
                                 <td>{item.facultyId}</td>
                                 <td>{item.name}</td>
+                                <td>{item.numStudent}</td>
+                                <td>{item.numStudentNotClass}</td>
                                 <td class="sticky-col">
                                     <i onClick={()=>loadSubjectByFac(item.facultyId)} data-bs-toggle="modal" data-bs-target="#listSubject" className='fa fa-edit iconaction'></i>
                                 </td>
