@@ -17,6 +17,8 @@ import addStudentEmployee from '../pages/employee/student/addStudent'
 import classEmployee from '../pages/employee/classes/classes'
 import addClassEmployee from '../pages/employee/classes/addClass'
 import facultyEmployee from '../pages/employee/faculty/faculty'
+import teacherEmployee from '../pages/employee/teacher/teacher'
+import addTeacherEmployee from '../pages/employee/teacher/addTeacher'
 
 //public
 import login from '../pages/public/login/login'
@@ -47,6 +49,8 @@ const employeeRoutes = [
     { path: "/employee/class", component: classEmployee, layout: layoutEmployee },
     { path: "/employee/add-class", component: addClassEmployee, layout: layoutEmployee },
     { path: "/employee/faculty", component: facultyEmployee, layout: layoutEmployee },
+    { path: "/employee/teacher", component: teacherEmployee, layout: layoutEmployee },
+    { path: "/employee/add-teacher", component: addTeacherEmployee, layout: layoutEmployee },
 ];
 
 export { publicRoutes, privateRoutes, adminRoutes, employeeRoutes};

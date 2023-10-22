@@ -274,7 +274,7 @@ function EmployeeStudent(){
                                     <td>{item.profile.gender==true?"Nam":"Nữ"}</td>
                                     <td>{item.profile.phone}</td>
                                     <td>{item.profile.address}</td>
-                                    <td>{item.profile.classes!=null?item.profile.classes.name:""}</td>
+                                    <td>{item.classes==null?"":item.classes.name}</td>
                                     <td>{item.facultyName}</td>
                                     <td class="sticky-col">
                                         <a href={"add-student?id="+item.studentId}><i className='fa fa-edit iconaction'></i></a>

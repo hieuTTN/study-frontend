@@ -4,7 +4,7 @@ import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AsyncSelect from 'react-select/async';
 
-var size = 1;
+var size = 10;
 var token = localStorage.getItem('token');
 var urlAll = ""
 async function loadAllClass(page, param, facultyId){
