@@ -27,6 +27,16 @@ function App() {
               }/>
             })}
 
+            {privateRoutes.map((route, index) => {
+              const Layout = route.layout || DefaultLayout
+              const Page = route.component
+              return <Route key={index} path={route.path} element={
+                <Layout>
+                  <Page/>
+                </Layout>
+              }/>
+            })}
+
             {adminRoutes.map((route, index) => {
               const Layout = route.layout || AdminLayout
               const Page = route.component

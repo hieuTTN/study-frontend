@@ -24,13 +24,23 @@ import addTeacherEmployee from '../pages/employee/teacher/addTeacher'
 import login from '../pages/public/login/login'
 import home from '../pages/public/home/home'
 
+//private
+import DefaultLayout from '../layout/user/defaultLayout/defaultLayout'
+import curriculum from '../pages/student/curriculum'
+import curriculumTeacher from '../pages/teacher/curriculum'
+import accountStudent from '../pages/student/account'
+import accountTeacher from '../pages/teacher/account'
+
 const publicRoutes = [
     { path: "/", component: home},
     { path: "/login", component: login, layout: layoutLogin }
 ];
 
 const privateRoutes = [
-    
+    { path: "/dao-tao/student", component: curriculum, layout: DefaultLayout},
+    { path: "/dao-tao/teacher", component: curriculumTeacher, layout: DefaultLayout},
+    { path: "/account-student", component: accountStudent, layout: DefaultLayout},
+    { path: "/account-teacher", component: accountTeacher, layout: DefaultLayout},
 ];
 
 const adminRoutes = [

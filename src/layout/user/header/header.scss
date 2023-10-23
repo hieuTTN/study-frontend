@@ -78,3 +78,22 @@
 .logoutitem{
     cursor: pointer;
 }
+.tablists{
+    list-style: none;
+    display: flex;
+    padding: 0px;
+}
+.tab-item{
+    cursor: pointer;
+    margin-right: 15px;
+    background-color: #edebeb;
+    padding: 5px 15px 5px 15px;
+}
+
+.react-tabs__tab--selected{
+    color: red;
+    border-bottom: 6px solid #2D8ECE;
+    font-weight: bold;
+    background-color: #d9d4d4;
+    color: #000;
+}

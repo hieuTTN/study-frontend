@@ -11,13 +11,31 @@ function header (){
     var token = localStorage.getItem('token');
     var authen = <li className="nav-item"><a className="nav-link" href="/login">Đăng nhập</a></li>
     if(token != null){
+        var userloggin = localStorage.getItem("user")
+        if(userloggin != null){
+            userloggin = JSON.parse(userloggin)
+        }
+        if(userloggin == null){
+            localStorage.removeItem("token");
+            window.location.href = 'login'
+        }
+        var acc = ''
+        var ctdt = ''
+        if(userloggin.authorities.name == 'ROLE_STUDENT'){
+            acc = <li><a className="dropdown-item" href="/account-student">Tài khoản</a></li>
+            ctdt = <li className="nav-item"><a className="nav-link" href="/dao-tao/student">Xem chương trình đào tạo</a></li>
+        }
+        if(userloggin.authorities.name == 'ROLE_TEACHER'){
+            acc = <li><a className="dropdown-item" href="/account-teacher">Tài khoản</a></li>
+            ctdt = <li className="nav-item"><a className="nav-link" href="/dao-tao/teacher">Xem chương trình đào tạo</a></li>
+        }
         authen = <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Tài khoản
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a className="dropdown-item" href="account">Tài khoản</a></li>
+                    {acc}
                     <li><a className="dropdown-item logoutitem" onClick={logout}>Đăng xuất</a></li>
                     </ul>
                 </li>
@@ -76,7 +94,7 @@ function header (){
                     <li className="nav-item"><a className="nav-link" href="/intro">Xem lịch thi</a></li>
                     <li className="nav-item"><a className="nav-link" href="#">Xem học phí</a></li>
                     <li className="nav-item"><a className="nav-link" href="#">Xem điểm</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#">Xem chương trình đào tạo</a></li>
+                    {ctdt}
                     {authen}
                     </ul>
                 </div>
