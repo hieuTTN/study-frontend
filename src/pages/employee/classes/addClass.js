@@ -47,9 +47,15 @@ async function saveClass(event){
     event.preventDefault();
     var listStudent = event.target.elements.student;
     var arrStudentId = [];
-    var i=0;
-    for(i=0; i<listStudent.length; i++){
-        arrStudentId.push(listStudent[i].value)
+    var i = 0;
+    console.log();
+    if(listStudent.value != null && listStudent.value != ""){
+        arrStudentId.push(listStudent.value)
+    }
+    else{
+        for(i=0; i<listStudent.length; i++){
+            arrStudentId.push(listStudent[i].value)
+        }
     }
     const payload = { 
         name:event.target.elements.className.value,
@@ -57,6 +63,7 @@ async function saveClass(event){
         facultyId:event.target.elements.faculty.value,
         listIdStudent:arrStudentId,
     }
+    // console.log(payload);
     var url = 'http://localhost:8080/api/class/employee/create'
     if(id != null){
         url = 'http://localhost:8080/api/class/employee/update/'+id;
