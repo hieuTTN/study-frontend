@@ -58,9 +58,9 @@ function header (){
                 <i className="fa fa-phone"></i>
                 <span className="d-none d-xl-inline ms-2">02462947586</span>
                 </a>
-                <a className="hotline-item" href="mailto:dinotechschool@imap.edu.vn">
+                <a className="hotline-item" href="mailto:ptithcm.edu.vn">
                 <i className="fa fa-envelope"></i>
-                <span className="d-none d-xl-inline ms-2">dinotechschool@imap.edu.vn</span>
+                <span className="d-none d-xl-inline ms-2">ptithcm.edu.vn</span>
                 </a>
             </div>
             </div>
@@ -83,12 +83,11 @@ function header (){
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Khóa học
+                        Tin tức
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a className="dropdown-item" href="#">Action</a></li>
-                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                        <li><a className="dropdown-item" href="#">Something else here</a></li>
+                        <li><a className="dropdown-item" href="#">Tin tức chung</a></li>
+                        <li><a className="dropdown-item" href="#">Tin khác</a></li>
                         </ul>
                     </li>
                     <li className="nav-item"><a className="nav-link" href="/intro">Xem lịch thi</a></li>
